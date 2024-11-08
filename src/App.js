@@ -10,23 +10,12 @@ const App = () => {
   const [cryptos, setCryptos] = useState([]);
   const [filteredCryptos, setFilteredCryptos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        const data = await fetchCryptocurrencyData();
-        setCryptos(data);
-        setFilteredCryptos(data);
-      } catch (err) {
-        setError("Failed to load cryptocurrency data.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadData();
+    fetchCryptocurrencyData().then((data) => {
+      setCryptos(data);
+      setFilteredCryptos(data);
+    }).catch(() => alert("Failed to load cryptocurrency data."));
   }, []);
 
   const handleSearch = (term) => {
@@ -39,23 +28,13 @@ const App = () => {
   };
 
   const handleFilter = (criteria) => {
-    const sortedData = [...filteredCryptos].sort((a, b) => {
-      switch (criteria) {
-        case "market_cap":
-          return b.market_cap - a.market_cap;
-        case "price":
-          return b.current_price - a.current_price;
-        case "availability":
-          return b.circulating_supply - a.circulating_supply;
-        default:
-          return 0;
-      }
-    });
+    const sortedData = [...filteredCryptos].sort((a, b) =>
+      criteria === "market_cap" ? b.market_cap - a.market_cap :
+      criteria === "price" ? b.current_price - a.current_price :
+      criteria === "availability" ? b.circulating_supply - a.circulating_supply : 0
+    );
     setFilteredCryptos(sortedData);
   };
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
 
   return (
     <div className="app">

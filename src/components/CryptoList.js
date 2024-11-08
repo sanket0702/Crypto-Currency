@@ -1,6 +1,5 @@
 // src/components/CryptoList.js
 import React from "react";
-import PropTypes from "prop-types";
 import "./CryptoList.css";
 
 const CryptoList = ({ cryptos }) => {
@@ -27,10 +26,6 @@ const CryptoList = ({ cryptos }) => {
       ))}
     </div>
   );
-};
-
-CryptoList.propTypes = {
-  cryptos: PropTypes.array.isRequired,
 };
 
 export default CryptoList;

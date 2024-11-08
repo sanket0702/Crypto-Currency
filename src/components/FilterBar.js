@@ -1,6 +1,5 @@
 // src/components/FilterBar.js
 import React from "react";
-import PropTypes from "prop-types";
 import "./FilterBar.css";
 
 const FilterBar = ({ onFilter }) => {
@@ -18,10 +17,6 @@ const FilterBar = ({ onFilter }) => {
       </select>
     </div>
   );
-};
-
-FilterBar.propTypes = {
-  onFilter: PropTypes.func.isRequired,
 };
 
 export default FilterBar;
