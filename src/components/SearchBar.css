@@ -1,0 +1,12 @@
+/* src/components/SearchBar.css */
+.search-bar {
+  margin: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
+  padding: 8px;
+  font-size: 16px;
+  width: 300px;
+}
